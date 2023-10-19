@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+	@apply mx-auto max-w-sm  md:max-w-[768px] lg:max-w-[1024px] 2xl:max-w-[1536px] sm:px-16 px-6;
+}
+
+.section {
+	@apply sm:mt-20 mt-8;
+}
