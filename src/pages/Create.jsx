@@ -5,8 +5,8 @@ import { firestore } from "../firebase";
 import { nanoid } from "nanoid";
 
 const Create = () => {
-	const [noteBody, setNoteBody] = useState<string>("");
-	const [noteTitle, setNoteTitle] = useState<string>("");
+	const [noteBody, setNoteBody] = useState("");
+	const [noteTitle, setNoteTitle] = useState("");
 	const notesRef = firestore.collection("notes");
 
 	const handleSubmit = (e) => {
@@ -76,7 +76,7 @@ const Create = () => {
 				>
 					Preview
 				</h2>
-				<div className=" px-4 py-2 flex-[1] bg-secondary outline-none text-gray-300 rounded-lg shadow-sm border border-[#2a2a2a] shadow-[#2a2a2a] overflow-y-scroll max-h-100% ">
+				<div className=" px-4 py-2 flex-[1] bg-secondary outline-none text-gray-300 rounded-lg shadow-sm border border-[#2a2a2a] shadow-[#2a2a2a]  ">
 					<ReactMarkDown>{noteBody.replace("\n", "\n\n")}</ReactMarkDown>
 				</div>
 			</form>
