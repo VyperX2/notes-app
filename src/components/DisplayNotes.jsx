@@ -25,7 +25,9 @@ const DisplayNotes = () => {
 				Create Note
 			</button>
 			<div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mt-8">
-				{notes?.map((note) => <NotePreview key={note.id} {...note} />)}
+				{notes?.map((note) => (
+					<NotePreview key={note.id} {...note} />
+				))}
 			</div>
 		</div>
 	);
