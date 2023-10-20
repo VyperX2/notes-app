@@ -2,12 +2,20 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useNavigate } from "react-router-dom";
 import NotePreview from "./NotePreview";
 import { firestore } from "../firebase";
+import { useEffect, useState } from "react";
 
 const DisplayNotes = () => {
 	const navigate = useNavigate();
 	const notesRef = firestore.collection("notes");
 	const query = notesRef.orderBy("createdAt");
 	const [notes] = useCollectionData(query);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		if (notes) {
+			setIsLoading(false);
+		}
+	}, [notes]);
 
 	return (
 		<div className="flex flex-col mt-8 w-full items-center ">
@@ -24,11 +32,11 @@ const DisplayNotes = () => {
 			>
 				Create Note
 			</button>
-			<div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mt-8">
+			{isLoading ? <h2 className=" text-8xl text-violet-900 font-bold mt-40">Loading ... </h2> : <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-y-4 gap-x-8 mt-8">
 				{notes?.map((note) => (
 					<NotePreview key={note.id} {...note} />
 				))}
-			</div>
+			</div>}
 		</div>
 	);
 };

@@ -1,6 +1,9 @@
+import { auth } from "../firebase";
+
 const Header = () => {
+
 	return (
-		<header className="text-6xl font-semibold font-Outfit text-center py-4">
+		<header className="text-6xl font-semibold font-Outfit text-center py-4 relative">
 			<h1
 				style={{
 					background:
@@ -11,6 +14,9 @@ const Header = () => {
 			>
 				Notes App
 			</h1>
+			<button onClick={() => auth.signOut()} className=" mt-8 text-2xl absolute -top-3 -right-96 text-white font-bold mb-4 bg-purple-950 py-3 px-9 rounded-lg shadow-md transition-all hover:shadow-lg hover:shadow-[#2a2a2a] hover:-translate-y-3  shadow-[#2a2a2a]">
+				Sign Out
+			</button>
 		</header>
 	);
 };

@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import ReactMarkDown from "react-markdown";
 import firebase from "firebase/compat/app";
-import { firestore } from "../firebase";
+import { auth, firestore } from "../firebase";
 import { nanoid } from "nanoid";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Create = () => {
 	const [noteBody, setNoteBody] = useState("");
 	const [noteTitle, setNoteTitle] = useState("");
 	const notesRef = firestore.collection("notes");
+	const [user] = useAuthState(auth);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-    if(!noteTitle && !noteBody) {
-      alert('You cant save an empty note')
-      return
-    }
+		if (!noteTitle && !noteBody) {
+			alert("You cant save an empty note");
+			return;
+		}
 		notesRef.add({
 			body: noteBody,
 			title: noteTitle,
 			createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 			id: nanoid(),
+			uid: user.uid,
 		});
 
 		setNoteBody("");
@@ -48,18 +51,14 @@ const Create = () => {
 				</button>
 
 				<textarea
-					onChange={(e) =>
-						setNoteTitle(e.target.value)
-					}
+					onChange={(e) => setNoteTitle(e.target.value)}
 					value={noteTitle}
 					placeholder="Title"
 					className="flex-[0.15] max-h-9 px-4 py-1 bg-secondary outline-none text-gray-300 rounded-lg shadow-sm border border-[#2a2a2a] shadow-[#2a2a2a]"
 				/>
 				<textarea
 					placeholder="Add Note Text (Markdown enabled)"
-					onChange={(e) =>
-						setNoteBody(e.target.value)
-					}
+					onChange={(e) => setNoteBody(e.target.value)}
 					value={noteBody}
 					className=" px-4 py-2 flex-1 bg-secondary outline-none text-gray-300 rounded-lg shadow-sm border border-[#2a2a2a] shadow-[#2a2a2a] "
 				/>
