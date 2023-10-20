@@ -4,12 +4,14 @@ import firebase from "firebase/compat/app";
 import { auth, firestore } from "../firebase";
 import { nanoid } from "nanoid";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
 	const [noteBody, setNoteBody] = useState("");
 	const [noteTitle, setNoteTitle] = useState("");
 	const notesRef = firestore.collection("notes");
 	const [user] = useAuthState(auth);
+  const navigate = useNavigate()
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -27,7 +29,9 @@ const Create = () => {
 
 		setNoteBody("");
 		setNoteTitle("");
+    navigate('/')
 	};
+
 	return (
 		<div className="min-h-screen flex flex-col py-8 gap-4 w-full overflow-x-hidden">
 			<h2
