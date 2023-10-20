@@ -5,7 +5,6 @@ import SelectedNote from "./pages/SelectedNote";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase";
 import firebase from "firebase/compat/app";
-import { useEffect } from "react";
 const App = () => {
 	const [user] = useAuthState(auth);
 

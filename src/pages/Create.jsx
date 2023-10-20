@@ -29,7 +29,7 @@ const Create = () => {
 		setNoteTitle("");
 	};
 	return (
-		<div className="min-h-screen flex flex-col py-8 gap-4 w-full">
+		<div className="min-h-screen flex flex-col py-8 gap-4 w-full overflow-x-hidden">
 			<h2
 				style={{
 					background:
